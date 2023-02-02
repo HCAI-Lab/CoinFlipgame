@@ -1,0 +1,116 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Result</title>
+  </head>
+  <body>
+<!--    <h1>Result</h1>-->
+    <h1 style="color: {{ message_color }}">{{ message }}</h1>
+<!--    <h1>{{ message }}</h1>-->
+        <p>Your Choice</p>
+            <div style=" width: 150px; height: 40px; border: 1px solid black;">
+        <p>{{choice}}</p>
+    </div>
+    <div class="choice-buttons" >
+
+    <form action="/play" method="POST">
+        <input style="font-size: 30px;margin-top: 30px;Height: 50px; Width:100px" type="submit" name="guess" value="Heads">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+
+        <input style="font-size: 30px;margin-top: 30px ;Height: 50px; Width:100px" type="submit" name="guess" value="Tails">
+<!--        <input style="float:left;font-size: 30px;margin-top: 30px" type="submit" name="guess" value="Heads">-->
+<!--        <input style="float:left;font-size: 30px;margin-top: 30px" type="submit" name="guess" value="Heads">-->
+<!--        <input style="float:right;font-size: 30px;margin-top: 30px" type="submit" name="guess" value="Tails">-->
+
+<!--      <input type="submit" value="Heads" style="font-size: 30px; margin-right: 10px" name="guess">-->
+<!--      <input type="submit" value="Tails" style="font-size: 30px; margin-left: 10px" name="guess">-->
+    </form>
+         <br />
+
+        <div id="win-rate" style="display: {% if display_winrate %}block{% else %}none{% endif %};"><h1>Your Win rate is: {{ WR }}% </h1></div>
+<input type="checkbox" id="toggle-win-rate" onclick="toggleWinRate()"> Show Win Rate
+<!--        <input type="checkbox" id="toggle-win-rate"> Show Win Rate-->
+
+
+
+
+
+
+       <div id="results" style="margin-top: 110px; width: 300px; height: 150px; border: 1px solid black;display: {% if display_results %}block{% else %}none{% endif %};">
+  <p>Last 5 flips:</p>
+  <ul>
+    {% for result in results %}
+      <li>{{ result }}</li>
+    {% endfor %}
+  </ul>
+</div>
+<input type="checkbox" id="toggle-results" onclick="toggleResults()"> Show Results
+<!--<input type="checkbox" id="toggle-results"> Show Results-->
+
+</div>
+        <div style="margin-top: 20px;">
+        <p>You have played: {{ counter }} times</p>
+
+
+    </div>
+
+
+<script>
+  // On page load, check if the checkbox state is saved in local storage
+  // window.onload = function() {
+  //   var winRateCheckbox = document.getElementById("toggle-win-rate");
+  //   var resultsCheckbox = document.getElementById("toggle-results");
+  //   var winRate = document.getElementById("win-rate");
+  //   var results = document.getElementById("results");
+  //   if (localStorage.getItem("winRateChecked") === "true") {
+  //     winRateCheckbox.checked = true;
+  //     winRate.style.display = "none";
+  //   } else {
+  //     winRateCheckbox.checked = false;
+  //     winRate.style.display = "block";
+  //   }
+  //   if (localStorage.getItem("resultsChecked") === "true") {
+  //     resultsCheckbox.checked = true;
+  //     results.style.display = "none";
+  //   } else {
+  //     resultsCheckbox.checked = false;
+  //     results.style.display = "block";
+  //   }
+  // }
+
+  function toggleWinRate(){
+    var checkbox = document.getElementById("toggle-win-rate");
+    var winRate = document.getElementById("win-rate");
+    if (checkbox.checked) {
+      winRate.style.display = "none";
+      localStorage.setItem("winRateChecked", "true");
+    } else {
+      winRate.style.display = "block";
+      localStorage.setItem("winRateChecked", "false");
+    }
+  }
+
+  function toggleResults(){
+    var checkbox = document.getElementById("toggle-results");
+    var results = document.getElementById("results");
+    if (checkbox.checked) {
+      results.style.display = "none";
+      localStorage.setItem("resultsChecked", "true");
+    } else {
+      results.style.display = "block";
+      localStorage.setItem("resultsChecked", "false");
+    }
+  }
+</script>
+
+
+
+
+      <form action="/play" method="POST"  style="margin-top: 30px; margin-bottom: 30px">
+      <input type="submit" align="center" value="Play Again" name="guess">
+        <input type="submit" align="center" value="End Game" name="guess">
+    </form>
+  </body>
+</html>

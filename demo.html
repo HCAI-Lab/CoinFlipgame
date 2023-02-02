@@ -1,0 +1,98 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Demo</title>
+  </head>
+  <body>
+    <h1>Demo</h1>
+    <h1 style="color: {{ message_color }}">{{ message }}</h1>
+
+    <div class="choice-buttons" >
+    <form action="/demo" method="POST"  style="margin-top: 30px; margin-bottom: 30px">
+      <input type="submit" align="center" value="Play Again" name="guess">
+        <input type="submit" align="center" value="End Game" name="guess">
+    </form>
+    <form action="/demo" method="POST">
+        <input style="font-size: 30px;margin-top: 30px" type="submit" name="guess" value="Heads">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+
+        <input style="font-size: 30px;margin-top: 30px" type="submit" name="guess" value="Tails">
+
+<!--      <input type="submit" value="Heads" style="font-size: 30px; margin-right: 10px" name="guess">-->
+<!--      <input type="submit" value="Tails" style="font-size: 30px; margin-left: 10px" name="guess">-->
+    </form>
+         <br />
+        <br />
+        <br />
+        <br />
+            <div id="results" style="margin-top: 110px; width: 300px; height: 150px; border: 1px solid black;margin-top: 110px; width: 300px; height: 150px; border: 1px solid black;display: {% if display_results %}block{% else %}none{% endif %};">
+        <p>Last 5 flips:</p>
+       <ul>
+           {% for result in results %}
+            <li>{{ result }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+        <input type="checkbox" id="toggle-results" onclick="toggleResults()"> Show Results
+
+
+</div>
+        <div style="margin-top: 20px;">
+        <p>You have played: {{ counter }} times</p>
+
+
+    </div>
+<div id="win-rate" style="display: {% if display_winrate %}block{% else %}none{% endif %};"><p>Your Win rate is: {{ WR }} </p></div>
+<input type="checkbox" id="toggle-win-rate" onclick="toggleWinRate()"> Show Win Rate
+
+<script>
+  // On page load, check if the checkbox state is saved in local storage
+  window.onload = function() {
+    var winRateCheckbox = document.getElementById("toggle-win-rate");
+    var resultsCheckbox = document.getElementById("toggle-results");
+    var winRate = document.getElementById("win-rate");
+    var results = document.getElementById("results");
+    if (localStorage.getItem("winRateChecked") === "true") {
+      winRateCheckbox.checked = true;
+      winRate.style.display = "none";
+    } else {
+      winRateCheckbox.checked = false;
+      winRate.style.display = "block";
+    }
+    if (localStorage.getItem("resultsChecked") === "true") {
+      resultsCheckbox.checked = true;
+      results.style.display = "none";
+    } else {
+      resultsCheckbox.checked = false;
+      results.style.display = "block";
+    }
+  }
+
+  function toggleWinRate(){
+    var checkbox = document.getElementById("toggle-win-rate");
+    var winRate = document.getElementById("win-rate");
+    if (checkbox.checked) {
+      winRate.style.display = "none";
+      localStorage.setItem("winRateChecked", "true");
+    } else {
+      winRate.style.display = "block";
+      localStorage.setItem("winRateChecked", "false");
+    }
+  }
+
+  function toggleResults(){
+    var checkbox = document.getElementById("toggle-results");
+    var results = document.getElementById("results");
+    if (checkbox.checked) {
+      results.style.display = "none";
+      localStorage.setItem("resultsChecked", "true");
+    } else {
+      results.style.display = "block";
+      localStorage.setItem("resultsChecked", "false");
+    }
+  }
+</script>
+  </body>
+</html>

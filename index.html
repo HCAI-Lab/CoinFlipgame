@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Biased Coin Flip Game</title>
+  </head>
+  <body>
+    <h1>Welcome to the Biased Coin Flip Game!</h1>
+          <ul>
+            <li><a href="/instructions">Welcome Script</a></li>
+            <li><a href="/demo">Play a demo</a></li>
+            <li><a href="/play">Start playing</a></li>
+
+        </ul>
+
+<form action="{{ url_for('create_folder') }}" method="POST">
+  <input type="text" name="folder_name">
+  <input type="submit" value="Create Folder">
+</form>
+
+  </body>
+</html>
